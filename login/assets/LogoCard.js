@@ -7,10 +7,13 @@ const LogoCard = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
+    console.log('Logo clicked, applying fade-out');
     document.body.classList.add('fade-out');
     setTimeout(() => {
+      console.log('Navigating to /login');
       navigate('/login');
       document.body.classList.remove('fade-out');
+      console.log('Fade-out class removed');
     }, 500);
   };
 
