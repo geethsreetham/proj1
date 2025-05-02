@@ -17,7 +17,6 @@
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 30px rgba(128, 90, 213, 0.5);
-  animation: fadeIn 2s ease-in;
 }
 
 .login-logo {
@@ -67,11 +66,6 @@
   50% {
     filter: drop-shadow(0 0 20px #aa7ff5);
   }
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
 }
 
 .forgot-password-link {
