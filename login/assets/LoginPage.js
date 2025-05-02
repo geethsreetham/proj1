@@ -8,7 +8,7 @@ const LoginPage = () => {
       <div className="login-glass">
         <div className="text-center mb-4">
           <img src={logo} alt="Logo" className="login-logo mb-3" />
-          <h2 className="login-title">ようこそ, Nove Link ✨</h2>
+          <h2 className="login-title">ようこそ, NoveLink ✨</h2>
           <p className="login-sub">Enter the portal to your destiny~</p>
         </div>
 
