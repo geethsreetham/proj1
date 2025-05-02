@@ -1,0 +1,98 @@
+@import url('https://fonts.cdnfonts.com/css/brittany-signature');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: black; /* Fallback color in case something goes wrong with background */
+}
+
+/* Full screen wrapper for the logo card */
+.logo-card-wrapper {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Glass-like effect for the logo circle */
+.logo-circle {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(8, 19, 115, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px rgba(128, 90, 213, 0.6), 0 0 10px rgba(255, 255, 255, 0.05);
+  animation: pulseGlow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-circle:hover {
+  transform: scale(1.05);
+}
+
+/* Logo image styling */
+.logo-img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  animation: fadeIn 2s ease-in;
+}
+
+/* Styling the logo text */
+.logo-text {
+  color: white;
+  font-style: italic;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  animation: slideUp 1.8s ease-out;
+  font-family: 'Brittany Signature', cursive;
+}
+
+/* For responsive scaling of the logo */
+@media (max-width: 768px) {
+  .logo-circle {
+    width: 250px;
+    height: 250px;
+  }
+
+  .logo-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .logo-text {
+    font-size: 2rem;
+  }
+}
+
+/* ✨ Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(128, 90, 213, 0.6), 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(128, 90, 213, 0.9), 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
