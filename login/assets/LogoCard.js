@@ -7,7 +7,6 @@ const LogoCard = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    // Smooth transition to login
     document.body.classList.add('fade-out');
     setTimeout(() => {
       navigate('/login');
@@ -16,20 +15,14 @@ const LogoCard = () => {
   };
 
   return (
-    <div className='logo-card-wrapper d-flex justify-content-center align-items-center'>
-      <div className="logo-card-glass d-flex justify-content-center align-items-center">
+    <div className="logo-card-wrapper flex justify-center items-center min-h-screen w-screen relative z-10">
+      <div className="logo-circle flex justify-center items-center" onClick={handleLogoClick}>
         <div className="logo-card-content text-center">
-
-  
-    <div className="logo-wrapper">
-      <div className="logo-glass" onClick={handleLogoClick}>
-        <img src={logo} alt="Logo" className="logo-img clickable" />
-        <p className='logo-text'>Nove Link</p>
-      </div>
-    </div>
-    </div>
-      </div>
+          <img src={logo} alt="Logo" className="logo-img clickable" />
+          <p className="logo-text">Nove Link</p>
         </div>
+      </div>
+    </div>
   );
 };
 
