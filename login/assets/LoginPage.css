@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
 
 .login-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #000000, #1e1e66, #3a1acb);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,15 +73,15 @@
   0% { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }
 }
+
 .forgot-password-link {
-    color: #cbbef7;
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .forgot-password-link:hover {
-    color: #ffffff;
-    text-decoration: underline;
-  }
-  
+  color: #cbbef7;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
