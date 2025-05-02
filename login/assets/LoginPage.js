@@ -7,15 +7,18 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleForgotPasswordClick = () => {
+    console.log('Forgot Password clicked, applying fade-out');
     document.body.classList.add('fade-out');
     setTimeout(() => {
+      console.log('Navigating to /forgot-password');
       navigate('/forgot-password');
       document.body.classList.remove('fade-out');
+      console.log('Fade-out class removed');
     }, 500);
   };
 
   return (
-    <div className="login-wrapper flex justify-center items-center animate-fadeIn">
+    <div className="login-wrapper flex justify-center items-center">
       <div className="login-glass">
         <div className="text-center mb-4">
           <img src={logo} alt="Logo" className="login-logo mb-3" />
