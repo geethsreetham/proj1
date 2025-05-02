@@ -1,10 +1,21 @@
 import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './LoginPage.css';
 import logo from './assets/logo.png';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleForgotPasswordClick = () => {
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      navigate('/forgot-password');
+      document.body.classList.remove('fade-out');
+    }, 500);
+  };
+
   return (
-    <div className="login-wrapper d-flex justify-content-center align-items-center">
+    <div className="login-wrapper flex justify-center items-center animate-fadeIn">
       <div className="login-glass">
         <div className="text-center mb-4">
           <img src={logo} alt="Logo" className="login-logo mb-3" />
@@ -21,9 +32,18 @@ const LoginPage = () => {
           </div>
           <button type="submit" className="btn login-btn w-100">Login</button>
 
-          {/* 💫 The new “Forgot password?” link */}
+          {/* Forgot password link with transition */}
           <div className="text-center mt-3">
-            <a href="/Forgot-password" className="forgot-password-link">Forgot Password?</a>
+            <Link
+              to="/forgot-password"
+              className="forgot-password-link"
+              onClick={(e) => {
+                e.preventDefault();
+                handleForgotPasswordClick();
+              }}
+            >
+              Forgot Password?
+            </Link>
           </div>
         </form>
       </div>
