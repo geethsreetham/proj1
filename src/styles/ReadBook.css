@@ -1,0 +1,65 @@
+.read-book-container {
+  padding: 2rem;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.book-content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #00ffcc;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+p {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.book-content {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.error {
+  color: #ff4d4d;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .read-book-container {
+    padding: 1rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .book-content {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .book-content-wrapper {
+    max-width: 90%;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+}
