@@ -16,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/read-book/:isbn" element={<ReadBook />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>
     </Router>
   );

@@ -16,7 +16,7 @@ function Home() {
         });
         setBooks(response.data);
       } catch (err) {
-        setError('Failed to fetch books');
+        setError('Failed to fetch books. Please try again.');
       }
     };
     fetchBooks();
@@ -38,7 +38,7 @@ function Home() {
             </div>
           ))
         ) : (
-          <p>No books available</p>
+          <p>No books available. Please try refreshing.</p>
         )}
       </div>
     </div>

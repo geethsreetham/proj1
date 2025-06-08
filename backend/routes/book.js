@@ -34,6 +34,14 @@ const fallbackBooks = [
     description: 'A dystopian novel about totalitarianism.',
     cover: 'https://covers.openlibrary.org/b/id/1111111-L.jpg',
     content: 'It was a bright cold day in April, and the clocks were striking thirteen...'
+  },
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    isbn: '9780446310789',
+    description: 'A story of racial injustice and the loss of innocence.',
+    cover: 'https://covers.openlibrary.org/b/id/1122311-L.jpg',
+    content: 'When he was nearly thirteen, my brother Jem got his arm badly broken...'
   }
 ];
 
@@ -41,28 +49,37 @@ router.get('/populate', async (req, res) => {
   try {
     let books = [];
     try {
-      const response = await axios.get('https://openlibrary.org/search.json?q=fiction&limit=50');
-      books = response.data.docs;
+      const response = await axios.get('https://openlibrary.org/search.json?q=fiction&limit=10&fields=title,author_name,isbn,cover_i,first_sentence');
+      books = response.data.docs.filter(book => book.isbn && book.isbn.length > 0); // Ensure ISBN exists
+      console.log('Fetched books:', books.length);
     } catch (apiError) {
-      console.log('API error, using fallback books');
+      console.error('Open Library API error:', apiError.message);
       books = fallbackBooks;
     }
 
+    let insertedCount = 0;
     for (const book of books) {
-      const existingBook = await Book.findOne({ isbn: book.isbn ? book.isbn[0] : book.isbn });
-      if (!existingBook) {
-        await Book.create({
-          title: book.title,
-          author: book.author_name ? book.author_name.join(', ') : book.author || 'Unknown',
-          description: book.description || 'No description available',
-          cover: book.cover_image ? `https://covers.openlibrary.org/b/id/${book.cover_image}-L.jpg` : book.cover || '',
-          isbn: book.isbn ? book.isbn[0] : book.isbn,
-          content: book.content || ''
-        });
+      try {
+        const existingBook = await Book.findOne({ isbn: book.isbn ? book.isbn[0] : null });
+        if (!existingBook) {
+          await Book.create({
+            title: book.title,
+            author: book.author_name ? book.author_name.join(', ') : book.author || 'Unknown',
+            description: book.description || 'No description available',
+            cover: book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` : book.cover || '',
+            isbn: book.isbn ? book.isbn[0] : null,
+            content: book.first_sentence ? book.first_sentence.join(' ') : book.content || ''
+          });
+          insertedCount++;
+        }
+      } catch (error) {
+        console.error(`Error saving book ${book.title}:`, error.message);
+        continue; // Skip to next book on error
       }
     }
-    res.send('Books populated');
+    res.send(`Populated ${insertedCount} books`);
   } catch (error) {
+    console.error('Population error:', error.message);
     res.status(500).send({ error: 'Failed to populate books' });
   }
 });
@@ -72,6 +89,7 @@ router.get('/', authenticate, async (req, res) => {
     const books = await Book.find();
     res.send(books);
   } catch (error) {
+    console.error('Fetch books error:', error.message);
     res.status(500).send({ error: 'Failed to fetch books' });
   }
 });
@@ -84,6 +102,7 @@ router.get('/:isbn', authenticate, async (req, res) => {
     }
     res.send(book);
   } catch (error) {
+    console.error('Fetch book error:', error.message);
     res.status(500).send({ error: 'Failed to fetch book' });
   }
 });

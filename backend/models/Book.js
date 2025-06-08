@@ -5,7 +5,7 @@ const bookSchema = new mongoose.Schema({
   author: { type: String },
   description: { type: String },
   cover: { type: String },
-  isbn: { type: String, unique: true },
+  isbn: { type: String, unique: true, sparse: true }, // Sparse index for optional ISBN
   content: { type: String }
 });
 

@@ -9,6 +9,10 @@ const User = require('../models/User');
 router.post('/register', async (req, res) => {
   try {
     const { email, password, username, name, dob } = req.body;
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+    if (existingUser) {
+      return res.status(400).send({ error: 'Email or username already exists' });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ email, password: hashedPassword, username, name, dob });
     await user.save();
@@ -31,6 +35,7 @@ router.post('/register', async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.status(201).send('User registered and welcome email sent');
   } catch (error) {
+    console.error('Registration error:', error);
     res.status(400).send({ error: 'Registration failed' });
   }
 });
@@ -49,6 +54,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'your-jwt-secret', { expiresIn: '1h' });
     res.send({ token });
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).send({ error: 'Login failed' });
   }
 });
@@ -84,6 +90,7 @@ router.post('/forgot-password', async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.send('Reset email sent');
   } catch (error) {
+    console.error('Forgot password error:', error);
     res.status(500).send({ error: 'Failed to send reset email' });
   }
 });

@@ -25,6 +25,7 @@ router.get('/profile', authenticate, async (req, res) => {
     }
     res.send(user);
   } catch (error) {
+    console.error('Profile fetch error:', error.message);
     res.status(500).send({ error: 'Failed to fetch profile' });
   }
 });
@@ -48,6 +49,7 @@ router.put('/profile', authenticate, async (req, res) => {
     await user.save();
     res.send('Profile updated');
   } catch (error) {
+    console.error('Profile update error:', error.message);
     res.status(500).send({ error: 'Failed to update profile' });
   }
 });
