@@ -6,7 +6,7 @@
   width: 100vw;
   background: linear-gradient(135deg, #ff69b4, #8a2be2);
   position: relative;
-  overflow: auto; /* Enable page scrolling */
+  overflow: hidden;
   animation: fadeIn 1s ease-in;
 }
 
@@ -71,8 +71,6 @@
   text-align: center;
   width: 90%;
   max-width: 400px;
-  max-height: 80vh; /* Limit height */
-  overflow-y: auto; /* Enable scrolling within box */
   position: relative;
   z-index: 2;
   animation: slideIn 0.5s ease-out;
@@ -120,8 +118,6 @@ h2 {
   font-size: 0.9rem;
   text-shadow: 0 0 3px #ff0000;
   animation: fadeIn 0.3s ease-in;
-  max-width: 100%; /* Prevent overflow */
-  word-wrap: break-word;
 }
 
 .loader {

@@ -1,12 +1,13 @@
 .register-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Align to top */
   justify-content: center;
-  min-height: 100vh;
+  height: auto; /* Remove min-height: 100vh */
+  padding: 20px; /* Add padding */
   width: 100vw;
   background: linear-gradient(135deg, #ff69b4, #8a2be2);
   position: relative;
-  overflow: auto; /* Enable page scrolling */
+  overflow: hidden; /* Disable scrolling */
   animation: fadeIn 1s ease-in;
 }
 
@@ -71,8 +72,8 @@
   text-align: center;
   width: 90%;
   max-width: 400px;
-  max-height: 80vh; /* Limit height */
-  overflow-y: auto; /* Enable scrolling within box */
+  max-height: 90vh; /* Fit within viewport */
+  overflow: hidden; /* No scrolling */
   position: relative;
   z-index: 2;
   animation: slideIn 0.5s ease-out;
@@ -120,8 +121,9 @@ h2 {
   font-size: 0.9rem;
   text-shadow: 0 0 3px #ff0000;
   animation: fadeIn 0.3s ease-in;
-  max-width: 100%; /* Prevent overflow */
-  word-wrap: break-word;
+  max-height: 3rem; /* Limit error height */
+  overflow: hidden; /* Truncate long errors */
+  text-overflow: ellipsis;
 }
 
 .success {
@@ -133,8 +135,9 @@ h2 {
   font-size: 0.9rem;
   text-shadow: 0 0 3px #00ff00;
   animation: fadeIn 0.3s ease-in;
-  max-width: 100%;
-  word-wrap: break-word;
+  max-height: 3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .loader {
@@ -228,6 +231,7 @@ button:disabled {
   .register-logo { width: 80px; height: 80px; }
   h2 { font-size: 1.5rem; }
   input, button { font-size: 0.9rem; padding: 0.6rem; }
+  .error, .success { font-size: 0.8rem; max-height: 2.5rem; }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {

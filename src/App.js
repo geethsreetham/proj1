@@ -11,22 +11,35 @@ import ResetPassword from './components/ResetPassword';
 
 const PrivateRoute = ({ component: Component }) => {
   const token = localStorage.getItem('token');
-  const isAuthenticated = async () => {
-    if (!token) return true;
+  if (!token) {
+    console.log('No token, redirecting to /login'); // Debug log
+    return <Navigate to="/login" />;
+  }
 
+  // Verify token asynchronously
+  const verifyToken = async () => {
     try {
       await axios.get('http://localhost:5000/api/auth/verify', {
         headers: { Authorization: `Bearer ${token}` }
       });
-      return false;
-    } catch (err) {
-      localStorage.removeItem('token');
+      console.log('Token verified, rendering component'); // Debug log
       return true;
+    } catch (err) {
+      console.error('Token verification failed:', err); // Debug log
+      localStorage.removeItem('token');
+      return false;
     }
   };
 
-  const authStatus = isAuthenticated();
-  return authStatus === false ? <Component /> : <Navigate to="/login" />;
+  // Since verifyToken is async, use a temporary state to handle navigation
+  verifyToken().then((isValid) => {
+    if (!isValid) {
+      console.log('Invalid token, redirecting to /login'); // Debug log
+      return <Navigate to="/login" />;
+    }
+  });
+
+  return <Component />;
 };
 
 function App() {

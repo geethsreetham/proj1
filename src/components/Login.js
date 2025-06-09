@@ -12,15 +12,19 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
+    e.stopPropagation(); // Stop event bubbling
     setLoading(true);
     setError('');
+    console.log('Login attempt:', { email }); // Debug log
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      console.log('Login response:', response.data); // Debug log
       localStorage.setItem('token', response.data.token);
-      navigate('/home');
+      console.log('Token set, navigating to /home'); // Debug log
+      navigate('/home', { replace: true }); // Replace history to prevent back navigation
     } catch (err) {
-      // Handle any error gracefully
+      console.error('Login error:', err); // Debug log
       setError(err.response?.data?.error || 'An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
