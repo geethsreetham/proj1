@@ -8,29 +8,22 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
       localStorage.setItem('token', response.data.token);
       navigate('/home');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
-    }
-  };
-
-  const handleForgotPassword = async () => {
-    if (!email) {
-      setError('Please enter your email');
-      return;
-    }
-    try {
-      await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
-      alert('Check your email for a password reset link');
-    } catch (err) {
-      setError(err.response?.data?.error || 'Failed to send reset email');
+      // Handle any error gracefully
+      setError(err.response?.data?.error || 'An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,6 +33,7 @@ function Login() {
         <img src={logo} alt="Novelink Logo" className="login-logo" />
         <h2>Novelink Login</h2>
         {error && <p className="error">{error}</p>}
+        {loading && <div className="loader"></div>}
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -47,6 +41,7 @@ function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
           <input
             type="password"
@@ -54,12 +49,15 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading}
           />
-          <button type="submit">Login</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
         </form>
-        <button className="forgot-password" onClick={handleForgotPassword}>
+        <Link to="/forgot-password" className="forgot-password">
           Forgot Password?
-        </button>
+        </Link>
         <p>
           Don't have an account? <Link to="/register" className="register-link">Register</Link>
         </p>

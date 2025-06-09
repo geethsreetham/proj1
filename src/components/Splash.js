@@ -1,19 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png'; // Import the logo
 import '../styles/Splash.css';
-import logo from '../assets/logo.png';
 
-function Splash() {
+const Splash = () => {
+  const navigate = useNavigate();
+
+  const handleEnter = () => {
+    navigate('/login');
+  };
+
   return (
-    <div className="splash-container">
-      <img src={logo} alt="Novelink Logo" className="splash-logo" />
-      <h1>Novelink</h1>
-      <div className="splash-buttons">
-        <Link to="/login" className="splash-button">Login</Link>
-        <Link to="/register" className="splash-button">Register</Link>
-      </div>
+    <div className="splash-container" onClick={handleEnter}>
+      <img src={logo} alt="Logo" className="logo" />
+      <p className="enter-text">Click Anywhere to Enter</p>
     </div>
   );
-}
+};
 
 export default Splash;

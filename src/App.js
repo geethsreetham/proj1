@@ -1,10 +1,33 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import axios from 'axios';
 import Splash from './components/Splash';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import ReadBook from './components/ReadBook';
 import Profile from './components/Profile';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+
+const PrivateRoute = ({ component: Component }) => {
+  const token = localStorage.getItem('token');
+  const isAuthenticated = async () => {
+    if (!token) return true;
+
+    try {
+      await axios.get('http://localhost:5000/api/auth/verify', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      return false;
+    } catch (err) {
+      localStorage.removeItem('token');
+      return true;
+    }
+  };
+
+  const authStatus = isAuthenticated();
+  return authStatus === false ? <Component /> : <Navigate to="/login" />;
+};
 
 function App() {
   return (
@@ -13,9 +36,11 @@ function App() {
         <Route path="/" element={<Splash />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/read-book/:isbn" element={<ReadBook />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/home" element={<PrivateRoute component={Home} />} />
+        <Route path="/read-book/:isbn" element={<PrivateRoute component={ReadBook} />} />
+        <Route path="/profile" element={<PrivateRoute component={Profile} />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>
     </Router>

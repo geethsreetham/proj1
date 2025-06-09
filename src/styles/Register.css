@@ -3,9 +3,16 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #000;
+  width: 100vw;
+  background: linear-gradient(135deg, #ff69b4, #8a2be2);
   position: relative;
-  overflow: hidden;
+  overflow: auto; /* Enable page scrolling */
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .register-container::before {
@@ -15,14 +22,44 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 2%, transparent 2.1%),
-              radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 1.5%, transparent 1.6%);
-  animation: twinkle 10s infinite;
+  background: 
+    radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.3) 1px, transparent 2px),
+    radial-gradient(circle at 65% 75%, rgba(255, 255, 255, 0.25) 1.2px, transparent 2.5px),
+    radial-gradient(circle at 45% 55%, rgba(200, 200, 255, 0.2) 1px, transparent 2px);
+  background-size: 60px 60px, 80px 80px, 70px 70px;
+  opacity: 0.6;
+  animation: starFlow 10s linear infinite;
+  z-index: 1;
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 0.4; }
+@keyframes starFlow {
+  0% { opacity: 0.6; transform: translate(0, 0); }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.6; transform: translate(40px, 40px); }
+}
+
+.register-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 55%
+  );
+  background-size: 250px 250px;
+  opacity: 0.3;
+  animation: streakShift 18s linear infinite;
+  z-index: 1;
+}
+
+@keyframes streakShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 250px 250px; }
 }
 
 .register-box {
@@ -30,30 +67,89 @@
   padding: 2rem;
   border-radius: 1rem;
   backdrop-filter: blur(5px);
-  border: 1px solid #00ffcc;
+  border: 1px solid #ff69b4;
   text-align: center;
   width: 90%;
   max-width: 400px;
+  max-height: 80vh; /* Limit height */
+  overflow-y: auto; /* Enable scrolling within box */
+  position: relative;
+  z-index: 2;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .register-logo {
-  width: 15vw;
-  max-width: 100px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 10px #00ffcc);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+  animation: logoScale 2s ease-in-out infinite;
+}
+
+@keyframes logoScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 h2 {
-  color: #00ffcc;
+  color: #fff;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
-  text-shadow: 0 0 5px #00ffcc;
+  text-shadow: 0 0 10px #ff69b4;
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 0.8; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
 }
 
 .error {
-  color: #ff4d4d;
+  color: #fff;
+  background: rgba(255, 0, 0, 0.7);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   margin-bottom: 1rem;
   font-size: 0.9rem;
+  text-shadow: 0 0 3px #ff0000;
+  animation: fadeIn 0.3s ease-in;
+  max-width: 100%; /* Prevent overflow */
+  word-wrap: break-word;
+}
+
+.success {
+  color: #fff;
+  background: rgba(0, 255, 0, 0.7);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-shadow: 0 0 3px #00ff00;
+  animation: fadeIn 0.3s ease-in;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.loader {
+  border: 4px solid #ff69b4;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 input {
@@ -62,72 +158,80 @@ input {
   padding: 0.8rem;
   margin: 0.8rem auto;
   background: transparent;
-  border: 1px solid #00ffcc;
+  border: 1px solid #ff69b4;
   border-radius: 0.5rem;
   color: #fff;
   font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  animation: slideInInput 0.5s ease-out;
+}
+
+@keyframes slideInInput {
+  from { transform: translateX(-10px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 input:focus {
   outline: none;
-  border-color: #00ccaa;
-  box-shadow: 0 0 5px #00ffcc;
+  border-color: #ff1493;
+  box-shadow: 0 0 10px #ff69b4;
+  transform: scale(1.02);
+}
+
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 button {
   width: 100%;
   padding: 0.8rem;
-  background: #00ffcc;
-  color: #000;
+  background: #ff69b4;
+  color: #fff;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  animation: slideInInput 0.5s ease-out;
 }
 
-button:hover {
-  background: #00ccaa;
-  box-shadow: 0 0 10px #00ffcc;
+button:hover:not(:disabled) {
+  background: #ff1493;
+  box-shadow: 0 0 15px #ff69b4;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .login-link {
-  color: #00ffcc;
+  color: #ff69b4;
   text-decoration: none;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  display: inline-block;
+  transition: text-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .login-link:hover {
-  text-decoration: underline;
+  text-shadow: 0 0 10px #ff69b4;
+  transform: translateY(-2px);
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .register-box {
-    padding: 1.5rem;
-    max-width: 90vw;
-  }
-  .register-logo {
-    width: 25vw;
-    max-width: 80px;
-  }
-  h2 {
-    font-size: 1.5rem;
-  }
-  input, button {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
+  .register-box { padding: 1.5rem; max-width: 90vw; }
+  .register-logo { width: 80px; height: 80px; }
+  h2 { font-size: 1.5rem; }
+  input, button { font-size: 0.9rem; padding: 0.6rem; }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
-  .register-box {
-    max-width: 70vw;
-  }
-  .register-logo {
-    width: 20vw;
-  }
-  h2 {
-    font-size: 1.7rem;
-  }
+  .register-box { max-width: 70vw; }
+  .register-logo { width: 100px; height: 100px; }
+  h2 { font-size: 1.7rem; }
 }

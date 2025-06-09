@@ -1,14 +1,26 @@
+/* Splash.css */
 .splash-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: #000;
-  position: relative;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background: #000000;
+  cursor: pointer;
   overflow: hidden;
-  color: #fff;
-  font-family: 'Arial', sans-serif;
+  position: relative;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000;
+  overflow: hidden;
 }
 
 .splash-container::before {
@@ -18,78 +30,108 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 2%, transparent 2.1%),
-              radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 1.5%, transparent 1.6%),
-              radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 1%, transparent 1.1%);
-  animation: twinkle 10s infinite;
+  background: 
+    radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.3) 1px, transparent 2px),
+    radial-gradient(circle at 65% 75%, rgba(255, 255, 255, 0.25) 1.2px, transparent 2.5px),
+    radial-gradient(circle at 45% 55%, rgba(200, 200, 255, 0.2) 1px, transparent 2px);
+  background-size: 60px 60px, 80px 80px, 70px 70px;
+  opacity: 0.6;
+  animation: starFlow 10s linear infinite;
+  z-index: 1;
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 0.4; }
+.splash-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 55%
+  );
+  background-size: 250px 250px;
+  opacity: 0.3;
+  animation: streakShift 18s linear infinite;
+  z-index: 1;
 }
 
-.splash-logo {
-  width: 20vw;
-  max-width: 150px;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 0 10px #00ffcc);
-  transition: transform 0.3s ease;
+@keyframes starFlow {
+  0% {
+    opacity: 0.6;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+    transform: translate(40px, 40px);
+  }
 }
 
-.splash-logo:hover {
+@keyframes streakShift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 250px 250px;
+  }
+}
+
+.logo {
+  width: 350px; /* Increased size for a big logo */
+  height: 350px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: radial-gradient(circle, #ffffff 50%, #ffd700 100%);
+  padding: 15px; /* Scaled padding for larger logo */
+  animation: logoScale 2s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); /* Adjusted for larger size */
+  position: relative;
+  z-index: 2;
+}
+
+.logo:hover {
   transform: scale(1.1);
+  filter: drop-shadow(0 0 30px rgba(248, 15, 205, 0.3)); /* Adjusted blur and opacity */
+  box-shadow: 
+    0 0 30px 10px rgba(118, 4, 141, 0.6), /* Adjusted for larger logo */
+    0 0 50px 20px rgba(255, 69, 0, 0.3); /* Adjusted for larger logo */
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #00ffcc;
-  text-shadow: 0 0 10px #00ffcc;
-}
-
-.splash-buttons {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.splash-button {
-  padding: 0.8rem 1.5rem;
-  background: #00ffcc;
-  color: #000;
-  text-decoration: none;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.splash-button:hover {
-  background: #00ccaa;
-  box-shadow: 0 0 10px #00ffcc;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .splash-logo {
-    width: 30vw;
-    max-width: 120px;
+@keyframes logoScale {
+  0%, 100% {    
+    transform: scale(1);
   }
-  h1 {
-    font-size: 2rem;
-  }
-  .splash-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+  50% {
+    transform: scale(1.05);
   }
 }
 
-@media (min-width: 601px) and (max-width: 1024px) {
-  .splash-logo {
-    width: 25vw;
-    max-width: 140px;
+.enter-text {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-family: 'Arial', sans-serif;
+  margin-top: 20px;
+  opacity: 0.8;
+  animation: textPulse 2s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: translateY(0);
   }
-  h1 {
-    font-size: 2.2rem;
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
   }
 }

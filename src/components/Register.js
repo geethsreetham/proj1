@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Register.css';
@@ -11,10 +11,22 @@ function Register() {
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => navigate('/login'), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [success, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess('');
     try {
       await axios.post('http://localhost:5000/api/auth/register', {
         email,
@@ -23,10 +35,11 @@ function Register() {
         name,
         dob
       });
-      alert('Registration successful! Check your email for a welcome message.');
-      navigate('/login');
+      setSuccess('Registration successful! Check your email for a welcome message. Redirecting to login...');
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,6 +49,8 @@ function Register() {
         <img src={logo} alt="Novelink Logo" className="register-logo" />
         <h2>Novelink Register</h2>
         {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
+        {loading && <div className="loader"></div>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -43,6 +58,7 @@ function Register() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            disabled={loading}
           />
           <input
             type="text"
@@ -50,6 +66,7 @@ function Register() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            disabled={loading}
           />
           <input
             type="date"
@@ -57,6 +74,7 @@ function Register() {
             value={dob}
             onChange={(e) => setDob(e.target.value)}
             required
+            disabled={loading}
           />
           <input
             type="email"
@@ -64,6 +82,7 @@ function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
           <input
             type="password"
@@ -71,12 +90,22 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading}
           />
-          <button type="submit">Register</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
         </form>
-        <p>
-          Already have an account? <Link to="/login" className="login-link">Login</Link>
-        </p>
+        {success && (
+          <p>
+            <Link to="/login" className="login-link">Back to Login</Link>
+          </p>
+        )}
+        {!success && (
+          <p>
+            Already have an account? <Link to="/login" className="login-link">Login</Link>
+          </p>
+        )}
       </div>
     </div>
   );
