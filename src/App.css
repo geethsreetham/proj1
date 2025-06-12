@@ -1,0 +1,89 @@
+/* Global styles for all pages */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  background: #0f0f1b;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, select, input {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Container for all pages */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Common card styles */
+.card {
+  background: #1a1a2e;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Button styles */
+.btn {
+  padding: 0.5rem 1rem;
+  background: #00ffcc;
+  border: none;
+  border-radius: 5px;
+  color: #0f0f1b;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #00ccff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 0.5rem;
+  }
+
+  .card img {
+    height: 150px;
+  }
+}

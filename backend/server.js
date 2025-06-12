@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
+const { scrapeGutenberg } = require('./scraper');
 
 dotenv.config();
 
@@ -12,11 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/novelink', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => console.log('MongoDB connected'))
+mongoose.connect('mongodb://localhost:27017/novelink')
+  .then(() => {
+    console.log('MongoDB connected');
+    scrapeGutenberg().catch(err => console.error('Initial scrape error:', err));
+  })
   .catch((err) => console.log('MongoDB error:', err));
 
 app.use('/api/auth', authRoutes);

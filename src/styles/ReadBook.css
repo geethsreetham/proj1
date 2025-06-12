@@ -1,87 +1,52 @@
 .read-book-container {
-  padding: 2rem;
-  background: #000;
-  position: relative;
-  overflow: hidden;
+  background-color: #1a1a1a;
   color: #fff;
   min-height: 100vh;
-  text-align: center;
-}
-
-.read-book-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 2%, transparent 2.1%),
-              radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 1.5%, transparent 1.6%);
-  animation: twinkle 10s infinite;
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 0.4; }
+  padding: 20px;
 }
 
 .book-content-wrapper {
   max-width: 800px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  backdrop-filter: blur(5px);
-  border: 1px solid #00ffcc;
 }
 
-h2 {
+.book-content-wrapper h2 {
   color: #00ffcc;
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  text-shadow: 0 0 5px #00ffcc;
 }
 
-p {
-  color: #ccc;
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+.book-cover {
+  display: block;
+  margin: 20px auto;
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.chapter-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.chapter-nav button, .chapter-nav select {
+  padding: 8px;
+  background-color: #333;
+  border: 1px solid #00ffcc;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .book-content {
-  text-align: left;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #fff;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  white-space: pre-wrap;
 }
 
 .error {
   color: #ff4d4d;
-  margin-bottom: 1rem;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .read-book-container {
-    padding: 1rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-  }
-  p {
-    font-size: 1rem;
-  }
-  .book-content {
-    padding: 1rem;
-    font-size: 0.9rem;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-  .book-content-wrapper {
-    max-width: 90%;
-  }
-  h2 {
-    font-size: 1.8rem;
-  }
+  text-align: center;
 }
