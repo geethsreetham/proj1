@@ -28,29 +28,21 @@ function ResetPassword() {
   };
 
   return (
-    <div className="reset-password-container">
-      <div className="reset-password-box">
-        <img src={logo} alt="Novelink Logo" className="reset-password-logo" />
-        <h2>Reset Password</h2>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
-        {loading && <div className="loader"></div>}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="password"
-            placeholder="Enter new password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? 'Updating...' : 'Reset Password'}
-          </button>
-        </form>
-        <p>
-          Back to <Link to="/login" className="login-link">Login</Link>
-        </p>
+    <div className="reset-container">
+      <img src={logo} alt="Logo" className="reset-logo" />
+      <div className="reset-title">Reset Password</div>
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success}</p>}
+      {loading && <div className="loader"></div>}
+      <form className="reset-form" onSubmit={handleSubmit}>
+        <label className="reset-label" htmlFor="password">New Password</label>
+        <input className="reset-input" type="password" id="password" name="password" placeholder="New Password" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={loading} />
+        <button className="reset-btn" type="submit" disabled={loading}>
+          {loading ? 'Updating...' : 'Reset Password'}
+        </button>
+      </form>
+      <div className="reset-links">
+        <a href="/login">Back to Login</a>
       </div>
     </div>
   );

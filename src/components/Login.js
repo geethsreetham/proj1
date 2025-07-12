@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Login.css';
 import logo from '../assets/logo.png';
@@ -12,19 +12,14 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    e.stopPropagation(); // Stop event bubbling
+    e.preventDefault();
     setLoading(true);
     setError('');
-    console.log('Login attempt:', { email }); // Debug log
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-      console.log('Login response:', response.data); // Debug log
       localStorage.setItem('token', response.data.token);
-      console.log('Token set, navigating to /home'); // Debug log
-      navigate('/home', { replace: true }); // Replace history to prevent back navigation
+      navigate('/home', { replace: true });
     } catch (err) {
-      console.error('Login error:', err); // Debug log
       setError(err.response?.data?.error || 'An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -33,38 +28,41 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <img src={logo} alt="Novelink Logo" className="login-logo" />
-        <h2>Novelink Login</h2>
-        {error && <p className="error">{error}</p>}
-        {loading && <div className="loader"></div>}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
-        <Link to="/forgot-password" className="forgot-password">
-          Forgot Password?
-        </Link>
-        <p>
-          Don't have an account? <Link to="/register" className="register-link">Register</Link>
-        </p>
+      <img src={logo} alt="Logo" className="login-logo" />
+      <div className="login-title">Novelink Login</div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label className="login-label" htmlFor="email">Email</label>
+        <input
+          className="login-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={loading}
+        />
+        <label className="login-label" htmlFor="password">Password</label>
+        <input
+          className="login-input"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          disabled={loading}
+        />
+        <button className="login-btn" type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+        {error && <div className="error" style={{ color: 'red', marginTop: '1em', textAlign: 'center' }}>{error}</div>}
+      </form>
+      <div className="login-links">
+        <a href="/forgot-password">Forgot Password?</a>
+        <span>Don't have an account? <a href="/register">Register</a></span>
       </div>
     </div>
   );

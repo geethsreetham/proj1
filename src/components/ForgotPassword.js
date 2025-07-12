@@ -24,28 +24,16 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="forgot-password-container">
-      <div className="forgot-password-box">
-        <img src={logo} alt="Novelink Logo" className="forgot-password-logo" />
-        <h2>Reset Password</h2>
-        {message && <p className="message">{message}</p>}
-        {loading && <div className="loader"></div>}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? 'Sending...' : 'Send Reset Link'}
-          </button>
-        </form>
-        <p>
-          Back to <Link to="/login" className="login-link">Login</Link>
-        </p>
+    <div className="forgot-container">
+      <img src={logo} alt="Logo" className="forgot-logo" />
+      <div className="forgot-title">Forgot Password</div>
+      <form className="forgot-form">
+        <label className="forgot-label" htmlFor="email">Email</label>
+        <input className="forgot-input" type="email" id="email" name="email" placeholder="Email" required />
+        <button className="forgot-btn" type="submit">Send Reset Link</button>
+      </form>
+      <div className="forgot-links">
+        <a href="/login">Back to Login</a>
       </div>
     </div>
   );

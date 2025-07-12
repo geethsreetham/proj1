@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Register.css';
 import logo from '../assets/logo.png';
@@ -45,67 +45,77 @@ function Register() {
 
   return (
     <div className="register-container">
-      <div className="register-box">
-        <img src={logo} alt="Novelink Logo" className="register-logo" />
-        <h2>Novelink Register</h2>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
-        {loading && <div className="loader"></div>}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <input
-            type="date"
-            placeholder="Date of Birth"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? 'Registering...' : 'Register'}
-          </button>
-        </form>
-        {success && (
-          <p>
-            <Link to="/login" className="login-link">Back to Login</Link>
-          </p>
-        )}
-        {!success && (
-          <p>
-            Already have an account? <Link to="/login" className="login-link">Login</Link>
-          </p>
-        )}
+      <img src={logo} alt="Logo" className="register-logo" />
+      <div className="register-title">Novelink Register</div>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <label className="register-label" htmlFor="username">Username</label>
+        <input
+          className="register-input"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          required
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          disabled={loading}
+        />
+        <label className="register-label" htmlFor="fullname">Full Name</label>
+        <input
+          className="register-input"
+          type="text"
+          id="fullname"
+          name="fullname"
+          placeholder="Full Name"
+          required
+          value={name}
+          onChange={e => setName(e.target.value)}
+          disabled={loading}
+        />
+        <label className="register-label" htmlFor="dob">Date of Birth</label>
+        <input
+          className="register-input"
+          type="date"
+          id="dob"
+          name="dob"
+          placeholder="dd-mm-yyyy"
+          required
+          value={dob}
+          onChange={e => setDob(e.target.value)}
+          disabled={loading}
+        />
+        <label className="register-label" htmlFor="email">Email</label>
+        <input
+          className="register-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={loading}
+        />
+        <label className="register-label" htmlFor="password">Password</label>
+        <input
+          className="register-input"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          disabled={loading}
+        />
+        <button className="register-btn" type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Register'}
+        </button>
+        {error && <div className="error" style={{ color: 'red', marginTop: '1em', textAlign: 'center' }}>{error}</div>}
+        {success && <div className="success" style={{ color: 'green', marginTop: '1em', textAlign: 'center' }}>{success}</div>}
+      </form>
+      <div className="register-links">
+        <span>Already have an account? <a href="/login">Login</a></span>
       </div>
     </div>
   );

@@ -93,28 +93,31 @@ function Books() {
           </select>
         </div>
         <div className="books-list">
-          <div className="books-grid">
-            {books.length > 0 ? (
-              books.map((book) => (
-                <Link to={`/read-book/${book.id}`} key={book.id} className="book-card">
-                  <img src={book.cover} alt={book.title} className="book-cover" />
-                  <h3>{book.title}</h3>
-                  <p>By: {getAuthors(book.author)}</p>
-                  {book.full_text ? (
-                    <p className="content-available">Content Available</p>
-                  ) : (
-                    <p className="content-unavailable">No Content Available</p>
-                  )}
-                </Link>
-              ))
-            ) : (
-              <p>No books found. Try adjusting your search or filters.</p>
-            )}
-          </div>
-          {page < totalPages && (
-            <button onClick={loadMore} className="see-more-btn">See More</button>
+          {books.length > 0 ? (
+            books.map((book) => (
+              <div key={book.id} className="book-card">
+                <img src={book.cover} alt={book.title} className="book-cover" />
+                <span className="book-lang-badge">{book.language}</span>
+                <div className="book-title">{book.title}</div>
+                <div className="book-author">By: {getAuthors(book.author)}</div>
+                <div className="book-genres">
+                  {book.genres && book.genres.map((genre, idx) => (
+                    <span className="book-genre-tag" key={idx}>{genre}</span>
+                  ))}
+                </div>
+                <div className="book-desc">{book.description}</div>
+                <a href={book.source_url} target="_blank" rel="noopener noreferrer" className="book-details-btn">Details</a>
+              </div>
+            ))
+          ) : (
+            <p>No books found. Try adjusting your search or filters.</p>
           )}
         </div>
+        {page < totalPages && (
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <button onClick={loadMore} className="see-more-btn">See More</button>
+          </div>
+        )}
       </div>
     </div>
   );

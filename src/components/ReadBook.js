@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import '../App.css';
+import "../styles/ReadBook.css";
 
 function ReadBook() {
   const { id, chapterIndex = 0 } = useParams();

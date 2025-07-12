@@ -1,52 +1,60 @@
-.read-book-container {
-  background-color: #1a1a1a;
-  color: #fff;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.book-content-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.book-content-wrapper h2 {
-  color: #00ffcc;
-}
-
-.book-cover {
-  display: block;
-  margin: 20px auto;
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.chapter-nav {
+.readbook-container {
+  width: 100%;
+  min-height: 60vh;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 0 32px 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  transition: background var(--transition), color var(--transition);
 }
 
-.chapter-nav button, .chapter-nav select {
-  padding: 8px;
-  background-color: #333;
-  border: 1px solid #00ffcc;
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
+.readbook-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  background: linear-gradient(90deg, var(--color-gold), var(--color-blue), var(--color-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 1.5em;
+  transition: color var(--transition), background var(--transition);
 }
 
-.book-content {
-  background-color: #222;
-  padding: 20px;
-  border-radius: 8px;
-  white-space: pre-wrap;
+.readbook-content {
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 16px var(--color-shadow);
+  padding: 2em 2.5em 2em 2.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1.5px solid var(--color-border);
+  min-width: 320px;
+  max-width: 700px;
+  transition: box-shadow var(--transition), border-color var(--transition);
 }
 
-.error {
-  color: #ff4d4d;
-  text-align: center;
+.readbook-content:hover {
+  box-shadow: 0 6px 32px var(--color-shadow);
+  border-color: var(--color-gold);
+}
+
+.readbook-text {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: 1.2em;
+  transition: color var(--transition);
+}
+
+@media (max-width: 700px) {
+  .readbook-content {
+    padding: 1.2em 1em 1.2em 1em;
+    min-width: 90vw;
+    max-width: 98vw;
+  }
 }

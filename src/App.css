@@ -1,89 +1,68 @@
-/* Global styles for all pages */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-x: hidden;
-  background: #0f0f1b;
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button, select, input {
-  font-family: 'Orbitron', sans-serif;
-}
-
-/* Container for all pages */
-.page-container {
+body, #root, .App {
   min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  transition: background var(--transition), color var(--transition);
 }
 
-.page-content {
-  flex: 1;
-  overflow-y: auto;
-}
-
-/* Common card styles */
-.card {
-  background: #1a1a2e;
-  border-radius: 10px;
-  padding: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
-}
-
-.card img {
+.App {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 64px 16px;
+  box-shadow: 0 4px 32px var(--color-shadow);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: box-shadow var(--transition), background var(--transition);
 }
 
-.card h3 {
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin-bottom: 0.5em;
+}
+
+button {
+  font-family: inherit;
   font-size: 1rem;
-  margin: 0.5rem 0;
-}
-
-.card p {
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-/* Button styles */
-.btn {
-  padding: 0.5rem 1rem;
-  background: #00ffcc;
+  padding: 0.7em 2em;
+  border-radius: var(--radius);
   border: none;
-  border-radius: 5px;
-  color: #0f0f1b;
-  font-weight: bold;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-blue), var(--color-purple));
+  color: var(--color-text-light);
+  box-shadow: 0 2px 8px var(--color-shadow);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
 }
 
-.btn:hover {
-  background: #00ccff;
+button:hover, button:focus {
+  background: linear-gradient(90deg, var(--color-blue), var(--color-gold), var(--color-purple));
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transform: translateY(-2px) scale(1.03);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .page-container {
-    padding: 0.5rem;
-  }
+input, textarea, select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.7em 1.2em;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  margin-bottom: 1em;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
 
-  .card img {
-    height: 150px;
-  }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px var(--color-gold);
+  outline: none;
 }

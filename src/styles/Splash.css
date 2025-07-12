@@ -1,137 +1,67 @@
-/* Splash.css */
 .splash-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  background: #000000;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
+  justify-content: center;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  transition: background var(--transition), color var(--transition);
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background: #000000;
-  overflow: hidden;
+.splash-logo {
+  max-width: 180px;
+  max-height: 180px;
+  margin-bottom: 2.5rem;
+  display: block;
 }
 
-.splash-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.3) 1px, transparent 2px),
-    radial-gradient(circle at 65% 75%, rgba(255, 255, 255, 0.25) 1.2px, transparent 2.5px),
-    radial-gradient(circle at 45% 55%, rgba(200, 200, 255, 0.2) 1px, transparent 2px);
-  background-size: 60px 60px, 80px 80px, 70px 70px;
-  opacity: 0.6;
-  animation: starFlow 10s linear infinite;
-  z-index: 1;
+.splash-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  background: linear-gradient(90deg, var(--color-gold), var(--color-blue), var(--color-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 1.2em;
+  text-align: center;
+  transition: color var(--transition), background var(--transition);
 }
 
-.splash-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    transparent 45%,
-    rgba(255, 255, 255, 0.15) 50%,
-    transparent 55%
-  );
-  background-size: 250px 250px;
-  opacity: 0.3;
-  animation: streakShift 18s linear infinite;
-  z-index: 1;
+.splash-desc {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 2em;
+  line-height: 1.6;
+  transition: color var(--transition);
 }
 
-@keyframes starFlow {
-  0% {
-    opacity: 0.6;
-    transform: translate(0, 0);
+.splash-btn {
+  margin-top: 2em;
+}
+
+.splash-enter {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .splash-logo {
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 1.5rem;
   }
-  50% {
-    opacity: 0.8;
+  .splash-title {
+    font-size: 1.3rem;
   }
-  100% {
-    opacity: 0.6;
-    transform: translate(40px, 40px);
-  }
-}
-
-@keyframes streakShift {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 250px 250px;
-  }
-}
-
-.logo {
-  width: 350px; /* Increased size for a big logo */
-  height: 350px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: radial-gradient(circle, #ffffff 50%, #ffd700 100%);
-  padding: 15px; /* Scaled padding for larger logo */
-  animation: logoScale 2s ease-in-out infinite;
-  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); /* Adjusted for larger size */
-  position: relative;
-  z-index: 2;
-}
-
-.logo:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 30px rgba(248, 15, 205, 0.3)); /* Adjusted blur and opacity */
-  box-shadow: 
-    0 0 30px 10px rgba(118, 4, 141, 0.6), /* Adjusted for larger logo */
-    0 0 50px 20px rgba(255, 69, 0, 0.3); /* Adjusted for larger logo */
-}
-
-@keyframes logoScale {
-  0%, 100% {    
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.enter-text {
-  color: #ffffff;
-  font-size: 1.5rem;
-  font-family: 'Arial', sans-serif;
-  margin-top: 20px;
-  opacity: 0.8;
-  animation: textPulse 2s ease-in-out infinite;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  position: relative;
-  z-index: 2;
-}
-
-@keyframes textPulse {
-  0%, 100% {
-    opacity: 0.8;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-5px);
+  .splash-desc {
+    font-size: 1rem;
   }
 }

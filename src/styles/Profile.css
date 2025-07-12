@@ -1,69 +1,67 @@
 .profile-container {
-  background-color: #1a1a1a;
-  color: #fff;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.profile-box {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: #222;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.profile-logo {
-  display: block;
-  margin: 0 auto 20px;
-  width: 100px;
-}
-
-.profile-box h2 {
-  text-align: center;
-  color: #00ffcc;
-}
-
-.profile-box form {
+  width: 100%;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  padding: 48px 0 32px 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  transition: background var(--transition), color var(--transition);
 }
 
-.profile-box label {
+.profile-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  background: linear-gradient(90deg, var(--color-gold), var(--color-blue), var(--color-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 1.5em;
+  transition: color var(--transition), background var(--transition);
+}
+
+.profile-info {
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 16px var(--color-shadow);
+  padding: 2em 2.5em 2em 2.5em;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: flex-start;
+  border: 1.5px solid var(--color-border);
+  min-width: 320px;
+  max-width: 420px;
+  transition: box-shadow var(--transition), border-color var(--transition);
 }
 
-.profile-box input {
-  padding: 8px;
-  background-color: #333;
-  border: 1px solid #00ffcc;
-  color: #fff;
-  border-radius: 4px;
+.profile-info:hover {
+  box-shadow: 0 6px 32px var(--color-shadow);
+  border-color: var(--color-gold);
 }
 
-.profile-box button {
-  padding: 10px;
-  background-color: #00ffcc;
-  color: #1a1a1a;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.profile-label {
+  font-size: 1rem;
+  color: var(--color-blue);
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  transition: color var(--transition);
 }
 
-.photo-upload {
-  margin-top: 20px;
+.profile-value {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-bottom: 1.2em;
+  transition: color var(--transition);
 }
 
-.error {
-  color: #ff4d4d;
-  text-align: center;
-}
-
-.success {
-  color: #00ffcc;
-  text-align: center;
+@media (max-width: 700px) {
+  .profile-info {
+    padding: 1.2em 1em 1.2em 1em;
+    min-width: 90vw;
+    max-width: 98vw;
+  }
 }
